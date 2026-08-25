@@ -1,0 +1,454 @@
+/* ============================================================
+   Gierke6 Art Space — palette drawn from the rooms themselves:
+   linen ground, plaster grey-green walls, pine floor, dark wood ink
+   ============================================================ */
+:root {
+  --linen:   #EFE9DD;  /* page ground */
+  --plaster: #DDDDD4;  /* wall grey-green, alternate sections */
+  --pine:    #9A6A3C;  /* floor tone — decoration only, NOT text-safe on linen or ink */
+  --umber:   #7C5230;  /* buttons, links */
+  --ink:     #33291F;  /* text, near-black warm brown */
+  --ink-soft:#5C5347;
+  --line:    rgba(51, 41, 31, 0.18);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+
+  --max-w: 72rem;
+  --max-w-narrow: 46rem;
+  --header-h: 4.25rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+/* anchors land below the fixed header */
+[id] { scroll-margin-top: calc(var(--header-h) + 1rem); }
+
+body {
+  margin: 0;
+  background: var(--linen);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.12;
+  margin: 0 0 1rem;
+}
+
+a { color: var(--umber); }
+
+.container {
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+.container.narrow { max-width: var(--max-w-narrow); }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 20;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  background: color-mix(in srgb, var(--linen) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.wordmark, .footer-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.wordmark span, .footer-wordmark span { color: var(--pine); }
+
+.nav-list {
+  display: flex;
+  gap: 2.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-list a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  padding-block: 0.5rem;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.nav-list a:hover, .nav-list a:focus-visible { border-bottom-color: var(--pine); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  padding: 0.75rem 0.25rem;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  width: 1.5rem;
+  height: 2px;
+  background: var(--ink);
+  margin: 5px 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:last-child  { transform: translateY(-3.5px) rotate(-45deg); }
+
+/* transparent header while over the hero (JS swaps to solid on scroll) */
+.js .site-header.over-hero:not(.is-scrolled) {
+  background: transparent;
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.js .site-header.over-hero:not(.is-scrolled) .wordmark,
+.js .site-header.over-hero:not(.is-scrolled) .nav-list a { color: #F6F1E7; }
+.js .site-header.over-hero:not(.is-scrolled) .wordmark span { color: #E5C9A6; }
+.js .site-header.over-hero:not(.is-scrolled) .nav-toggle span { background: #F6F1E7; }
+.js .site-header.over-hero:not(.is-scrolled) .nav-list.is-open { background: var(--linen); }
+.js .site-header.over-hero:not(.is-scrolled) .nav-list.is-open a { color: var(--ink); }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  isolation: isolate;
+}
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, rgba(28, 20, 12, 0.72) 0%, rgba(28, 20, 12, 0.25) 45%, rgba(28, 20, 12, 0.32) 100%);
+}
+.hero-content {
+  padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(3rem, 8vh, 5.5rem);
+  width: 100%;
+  max-width: 60rem;
+  color: #F6F1E7;
+}
+.hero-kicker {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+  color: #E5D9C4;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 6.5vw, 5rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.25rem;
+  text-wrap: balance;
+}
+.hero-sub {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  margin: 0 0 2.25rem;
+  color: #EFE7D8;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.85rem 2.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.btn-solid {
+  background: var(--umber);
+  color: #F6F1E7;
+  border-color: var(--umber);
+}
+.btn-solid:hover, .btn-solid:focus-visible {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.btn-ghost {
+  color: #F6F1E7;
+  border-color: rgba(246, 241, 231, 0.7);
+}
+.btn-ghost:hover, .btn-ghost:focus-visible {
+  background: rgba(246, 241, 231, 0.14);
+  border-color: #F6F1E7;
+}
+
+/* ---------- Intro ---------- */
+.intro { padding: clamp(4.5rem, 10vh, 7.5rem) 0 0; text-align: center; }
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--umber); /* pine fails AA contrast at this size on linen */
+  margin: 0 0 1rem;
+}
+.use-list {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin: 0 0 2.5rem;
+}
+.intro h2 {
+  font-size: clamp(1.9rem, 4.4vw, 3.1rem);
+  text-wrap: balance;
+}
+.lede { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--ink-soft); margin: 0 auto 2rem; }
+.conditions {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  line-height: 1.5;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 1.5rem 0;
+  max-width: 34rem;
+  margin: 0 auto 3.5rem;
+}
+
+.fact-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-width: var(--max-w);
+  margin-inline: auto;
+}
+.fact {
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.fact + .fact { border-left: 1px solid var(--line); }
+.fact-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+  line-height: 1;
+}
+.fact-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ---------- Wall labels ---------- */
+.labels-section {
+  background: var(--plaster);
+  padding: clamp(4rem, 9vh, 6.5rem) 0;
+  margin-top: clamp(4rem, 9vh, 6.5rem);
+}
+.label-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  align-items: start; /* wall labels hug their text, like real museum labels */
+  max-width: 58rem;
+  margin-inline: auto;
+}
+@media (max-width: 40rem) {
+  .label-grid { grid-template-columns: 1fr; }
+}
+.wall-label {
+  background: var(--linen);
+  padding: 2rem 1.75rem 2.25rem;
+  box-shadow: 0 1px 2px rgba(51, 41, 31, 0.08), 0 8px 24px rgba(51, 41, 31, 0.06);
+}
+.wall-label h3 {
+  font-size: 1.35rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1rem;
+}
+.wall-label ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.wall-label li + li { margin-top: 0.6rem; }
+
+/* ---------- Rooms ---------- */
+.rooms { padding: clamp(4.5rem, 10vh, 7.5rem) 0 0; }
+.rooms h2 { font-size: clamp(1.9rem, 4.4vw, 3.1rem); }
+.rooms-text p { margin: 0 0 1.25rem; color: var(--ink-soft); }
+.rooms-closing {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+
+.gallery {
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+}
+.gallery figure { margin: 0; }
+.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.gallery figcaption {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 0.7rem;
+}
+.ph-frame {
+  aspect-ratio: 4 / 3;
+  border: 1px dashed var(--line);
+  background: color-mix(in srgb, var(--plaster) 55%, var(--linen));
+  display: grid;
+  place-items: center;
+}
+.ph-frame span {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ---------- Contact (inverted — the page's destination) ---------- */
+.contact {
+  text-align: center;
+  padding: clamp(4.5rem, 10vh, 7.5rem) 0;
+  margin-top: clamp(4.5rem, 10vh, 7.5rem);
+  background: var(--ink);
+  color: #EFE7D8;
+}
+.contact h2 { font-size: clamp(1.9rem, 4.4vw, 3.1rem); color: #F6F1E7; }
+.contact p { color: #D9CFBF; max-width: 34rem; margin-inline: auto; }
+.contact-hint {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+.contact-actions {
+  margin-top: 2.25rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.contact .btn-solid { background: #C99A63; border-color: #C99A63; color: var(--ink); }
+.contact .btn-solid:hover, .contact .btn-solid:focus-visible { background: #B8874F; border-color: #B8874F; color: var(--ink); }
+.contact-mail { margin-top: 1.5rem; font-size: 0.95rem; }
+.contact-mail a { color: #E5C9A6; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 2.5rem 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.footer-grid p { margin: 0; }
+
+/* ---------- Reveal on scroll (gated on .js so no-JS visitors see everything) ---------- */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 47.9rem) {
+  .br-lg { display: none; }
+  .nav-toggle { display: block; }
+  .nav-list {
+    position: absolute;
+    top: var(--header-h);
+    right: 0;
+    left: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--linen);
+    border-bottom: 1px solid var(--line);
+    display: none;
+  }
+  .nav-list.is-open { display: flex; }
+  .nav-list li { border-top: 1px solid var(--line); }
+  .nav-list a { display: block; padding: 1rem clamp(1.25rem, 4vw, 2.5rem); }
+
+  .fact-strip { grid-template-columns: repeat(2, 1fr); }
+  .fact + .fact { border-left: 0; }
+  .fact:nth-child(even) { border-left: 1px solid var(--line); }
+  .fact:nth-child(n+3) { border-top: 1px solid var(--line); }
+
+  .gallery { grid-template-columns: 1fr; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  * { transition-duration: 0.01ms !important; }
+}
+
+/* ---------- Impressum page ---------- */
+.legal-page {
+  padding: calc(var(--header-h) + 3rem) 0 4rem;
+  max-width: var(--max-w-narrow);
+}
+.legal-page h1 { font-size: clamp(1.9rem, 4.4vw, 2.8rem); }
+.legal-page h2 { font-size: 1.3rem; margin-top: 2.5rem; }
+.legal-page p { color: var(--ink-soft); }
