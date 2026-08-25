@@ -22,8 +22,36 @@ if (header) {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-// Scroll reveal — skipped entirely for reduced-motion users (CSS shows content)
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Rotating hero headline (zimmer48-style). The static full title stays in the
+// markup for no-JS visitors and reduced-motion users; screen readers keep the
+// full line via a visually hidden span.
+const heroTitle = document.querySelector('.hero-title');
+if (heroTitle && !prefersReduced) {
+  const words = ['Gallery.', 'Meetings.', 'Workshops.', 'Productions.'];
+  const h1 = heroTitle.parentElement;
+  h1.textContent = '';
+  const srText = document.createElement('span');
+  srText.className = 'sr-only';
+  srText.textContent = words.join(' ');
+  const rotator = document.createElement('span');
+  rotator.className = 'hero-rotator';
+  rotator.setAttribute('aria-hidden', 'true');
+  rotator.textContent = words[0];
+  h1.append(srText, rotator);
+  let idx = 0;
+  setInterval(() => {
+    rotator.classList.add('is-out');
+    setTimeout(() => {
+      idx = (idx + 1) % words.length;
+      rotator.textContent = words[idx];
+      rotator.classList.remove('is-out');
+    }, 450);
+  }, 2800);
+}
+
+// Scroll reveal — skipped entirely for reduced-motion users (CSS shows content)
 const revealEls = document.querySelectorAll('.reveal');
 
 if (!prefersReduced && 'IntersectionObserver' in window) {

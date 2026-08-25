@@ -11,7 +11,7 @@
   --ink-soft:#5C5347;
   --line:    rgba(51, 41, 31, 0.18);
 
-  --font-display: "Fraunces", Georgia, serif;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
 
   --max-w: 72rem;
@@ -40,9 +40,22 @@ img { max-width: 100%; display: block; }
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.12;
+  letter-spacing: 0.01em;
   margin: 0 0 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 a { color: var(--umber); }
@@ -72,7 +85,8 @@ a { color: var(--umber); }
 
 .wordmark, .footer-wordmark {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-weight: 600;
+  font-size: 1.2rem;
   letter-spacing: 0.01em;
   color: var(--ink);
   text-decoration: none;
@@ -137,7 +151,7 @@ a { color: var(--umber); }
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   isolation: isolate;
 }
 .hero-img {
@@ -156,9 +170,11 @@ a { color: var(--umber); }
     linear-gradient(to top, rgba(28, 20, 12, 0.72) 0%, rgba(28, 20, 12, 0.25) 45%, rgba(28, 20, 12, 0.32) 100%);
 }
 .hero-content {
-  padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(3rem, 8vh, 5.5rem);
+  padding: var(--header-h) clamp(1.25rem, 5vw, 4rem) 0;
   width: 100%;
   max-width: 60rem;
+  margin-inline: auto;
+  text-align: center;
   color: #F6F1E7;
 }
 .hero-kicker {
@@ -170,18 +186,28 @@ a { color: var(--umber); }
   color: #E5D9C4;
 }
 .hero h1 {
-  font-size: clamp(2.4rem, 6.5vw, 5rem);
-  font-weight: 300;
-  letter-spacing: 0.01em;
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   margin-bottom: 1.25rem;
   text-wrap: balance;
+}
+/* rotating headline word (zimmer48-style), built by JS */
+.hero-rotator {
+  display: inline-block;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.hero-rotator.is-out {
+  opacity: 0;
+  transform: translateY(0.35em);
 }
 .hero-sub {
   font-size: clamp(1.05rem, 2vw, 1.3rem);
   margin: 0 0 2.25rem;
   color: #EFE7D8;
 }
-.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 
 /* ---------- Buttons ---------- */
 .btn {
