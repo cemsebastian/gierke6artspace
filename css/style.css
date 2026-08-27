@@ -322,8 +322,8 @@ a { color: var(--umber); }
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr; /* all four cards share the same height */
   gap: clamp(1.25rem, 2.5vw, 2rem);
-  align-items: start; /* wall labels hug their text, like real museum labels */
   max-width: 58rem;
   margin-inline: auto;
 }
