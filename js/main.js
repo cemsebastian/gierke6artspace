@@ -42,6 +42,7 @@ if (heroTitle && !prefersReduced) {
   h1.append(srText, rotator);
   let idx = 0;
   setInterval(() => {
+    if (document.hidden) return;
     rotator.classList.add('is-out');
     setTimeout(() => {
       idx = (idx + 1) % words.length;

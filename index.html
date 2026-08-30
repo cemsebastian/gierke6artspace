@@ -3,11 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gierke6 Art Space – Galerie &amp; Eventraum in Berlin-Charlottenburg</title>
-  <meta name="description" content="Gierke6 Art Space: 100 m², 4 helle Räume in Berlin-Charlottenburg zu mieten – für Ausstellungen, Meetings, Workshops, Seminare, Foto- und Filmproduktionen.">
+  <title>Galerie &amp; Eventraum mieten in Berlin-Charlottenburg – Gierke6 Art Space</title>
+  <meta name="description" content="100 m², 4 helle Räume in Berlin-Charlottenburg mieten – für Ausstellungen, Meetings, Workshops, Seminare, Foto- und Filmproduktionen. Jetzt anfragen.">
   <meta property="og:title" content="Gierke6 Art Space – Raum für Kunst, Ideen und Begegnungen">
   <meta property="og:description" content="100 m², 4 helle Räume in Berlin-Charlottenburg zu mieten – für Ausstellungen, Meetings, Workshops und Produktionen.">
-  <meta property="og:image" content="https://gierke6artspace.de/img/hero.jpg">
+  <meta property="og:site_name" content="Gierke6 Art Space">
+  <meta property="og:image" content="https://gierke6artspace.de/img/galerie-charlottenburg-schaufenster-1600.jpg">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:image:alt" content="Heller Galerieraum mit Holzdielen und Schaufenster in Berlin-Charlottenburg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gierke6 Art Space – Galerie &amp; Eventraum in Berlin-Charlottenburg">
+  <meta name="twitter:description" content="100 m², 4 helle Räume zu mieten – für Ausstellungen, Meetings, Workshops und Produktionen.">
+  <meta name="twitter:image" content="https://gierke6artspace.de/img/galerie-charlottenburg-schaufenster-1600.jpg">
+  <meta name="theme-color" content="#EFE9DD">
   <meta property="og:url" content="https://gierke6artspace.de/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
@@ -16,25 +25,34 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["LocalBusiness", "EventVenue"],
     "name": "Gierke6 Art Space",
-    "description": "Galerie- und Eventraum in Berlin-Charlottenburg: 100 m², 4 helle Räume für Ausstellungen, Meetings, Workshops, Seminare, Foto- und Filmproduktionen.",
+    "description": "Galerie- und Eventraum in Berlin-Charlottenburg: 100 m², 4 helle Räume zu mieten für Ausstellungen, Meetings, Workshops, Seminare, Foto- und Filmproduktionen. Termine nach Vereinbarung.",
     "url": "https://gierke6artspace.de/",
-    "image": "https://gierke6artspace.de/img/hero.jpg",
+    "image": "https://gierke6artspace.de/img/galerie-charlottenburg-schaufenster-1600.jpg",
     "email": "gierkeplatz6@gmail.com",
     "telephone": "+491639859835",
+    "priceRange": "auf Anfrage",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Schustehrusstraße 17",
       "postalCode": "10585",
       "addressLocality": "Berlin",
+      "addressRegion": "Berlin",
       "addressCountry": "DE"
-    }
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 52.51714, "longitude": 13.30342 },
+    "maximumAttendeeCapacity": 70,
+    "isAccessibleForFree": false,
+    "sameAs": [
+      "https://gierke6contemporary.de/",
+      "https://www.instagram.com/gierke_6/"
+    ],
+    "founder": { "@type": "Person", "name": "Djamileh Wagner" }
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/archivo-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/archivo-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23EFE9DD'/><text x='50' y='72' font-size='64' text-anchor='middle' font-family='Georgia,serif' fill='%2333291F'>G6</text></svg>">
 </head>
@@ -57,7 +75,7 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <img class="hero-img" src="img/hero.jpg" alt="Heller Galerieraum mit Holzdielen, Stuck und großem Schaufenster zur Straße" fetchpriority="high">
+    <img class="hero-img" src="img/galerie-charlottenburg-schaufenster-1600.jpg" srcset="img/galerie-charlottenburg-schaufenster-800.jpg 800w, img/galerie-charlottenburg-schaufenster-1200.jpg 1200w, img/galerie-charlottenburg-schaufenster-1600.jpg 1600w" sizes="100vw" alt="Heller Galerieraum mit Holzdielen, Stuck und großem Schaufenster zur Straße" width="1600" height="1200" fetchpriority="high">
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-content">
       <p class="hero-kicker">Berlin-Charlottenburg</p>
@@ -71,12 +89,12 @@
   </section>
 
   <!-- ============ INTRO ============ -->
-  <section class="intro" id="raeume">
+  <section class="intro" id="ueberblick">
     <div class="container narrow">
       <p class="eyebrow reveal">Gierke6 Art Space in Berlin-Charlottenburg</p>
       <p class="use-list reveal">Ausstellungen&ensp;·&ensp;Präsentationen&ensp;·&ensp;Meetings&ensp;·&ensp;Workshops&ensp;·&ensp;Fotoshootings&ensp;·&ensp;Film&ensp;·&ensp;Pop-Ups</p>
       <h2 class="reveal">Ein Raum für Kunst, Ideen und&nbsp;Begegnungen.</h2>
-      <p class="lede reveal">Auf 100&nbsp;m² bieten wir einen besonderen Ort für kreative Projekte, Ausstellungen und Veranstaltungen.</p>
+      <p class="lede reveal">Auf 100&nbsp;m² bieten wir einen besonderen Ort zum Mieten – für kreative Projekte, Ausstellungen und Veranstaltungen.</p>
       <p class="conditions reveal">Attraktive Konditionen für Unternehmen.<br>Faire Konditionen für Künstler und unabhängige Projekte.</p>
     </div>
     <div class="fact-strip reveal" role="list">
@@ -94,7 +112,7 @@
       </div>
       <div class="fact" role="listitem">
         <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10.5h11v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4v-5ZM16 12h1.5a2 2 0 0 1 0 4H16M7.5 7.5c0-1.2 1-1.3 1-2.5M11 7.5c0-1.2 1-1.3 1-2.5"/></svg>
-        <span class="fact-num">Küche</span><span class="fact-label">mit Backstage- und Schlafbereich</span>
+        <span class="fact-num">Küche</span><span class="fact-label">plus Backstage- und Schlafbereich</span>
       </div>
     </div>
   </section>
@@ -102,6 +120,7 @@
   <!-- ============ WALL LABELS / FACTS ============ -->
   <section class="labels-section">
     <div class="container">
+      <h2 class="sr-only">Der Space auf einen Blick: Räume, Lage, Ausstattung und Kapazität</h2>
       <ul class="label-grid">
         <li class="wall-label reveal">
           <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 20.5h15M6.5 20.5v-16a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16"/><circle cx="14.5" cy="12" r="0.75" fill="currentColor"/></svg>
@@ -149,23 +168,23 @@
   </section>
 
   <!-- ============ VIER RÄUME ============ -->
-  <section class="rooms">
+  <section class="rooms" id="raeume">
     <div class="container narrow">
       <h2 class="reveal">Vier Räume.<br>Viele Möglichkeiten.</h2>
       <div class="rooms-text reveal">
         <p>Gierke6 Art Space ist ein vielseitiger Art Space im Herzen von Berlin-Charlottenburg. Auf rund 100&nbsp;m² bieten vier klare, charaktervolle Räume den passenden Rahmen für Ausstellungen, Präsentationen, Workshops, Seminare, Castings sowie Foto- und Filmproduktionen.</p>
         <p>Die beiden großzügigen Haupträume überzeugen durch ihre besonderen Perspektiven und bieten viel Freiheit für individuelle Inszenierungen. Flexible Deckenaufhängungen ermöglichen die Präsentation von Kunst, Installationen, Licht und außergewöhnlichen Set-ups.</p>
-        <p>Die Räume lassen sich individuell gestalten und an unterschiedliche Formate anpassen. Eine Küche und ein separater Backstage-Bereich ergänzen den Space und schaffen die nötige Infrastruktur für Künstler, Teams und Gäste.</p>
+        <p>Die Räume lassen sich individuell gestalten und an unterschiedliche Formate anpassen. Eine Küche und ein separater Backstage-Bereich ergänzen den Space und schaffen die nötige Infrastruktur für Künstler, Teams und Gäste. Die Räume können tageweise oder für längere Zeiträume gemietet werden.</p>
         <p class="rooms-closing">Ein Ort für Kunst, Ideen und Begegnungen.</p>
       </div>
     </div>
     <div class="gallery container">
       <figure class="reveal">
-        <img src="img/raum1.jpg" alt="Hauptraum mit Stuckdecke, Holzdielen und Galeriebeleuchtung" loading="lazy">
+        <img src="img/galerie-charlottenburg-hauptraum.jpg" alt="Hauptraum mit Stuckdecke, Holzdielen und Galeriebeleuchtung" width="1000" height="750" loading="lazy">
         <figcaption>Hauptraum I — Tageslicht, Stuck, Holzdielen</figcaption>
       </figure>
       <figure class="reveal">
-        <img src="img/raum2.jpg" alt="Galerieraum mit großem Schaufenster zur Schustehrusstraße" loading="lazy">
+        <img src="img/galerie-charlottenburg-hauptraum-2.jpg" alt="Galerieraum mit großem Schaufenster zur Schustehrusstraße" width="1000" height="750" loading="lazy">
         <figcaption>Hauptraum II — Schaufensterfront zur Straße</figcaption>
       </figure>
       <!-- PLACEHOLDER: Foto ersetzen — Datei nach img/raum3.jpg kopieren und diesen Block anpassen -->
@@ -202,7 +221,7 @@
     <p class="footer-wordmark">Gierke<span>6</span> Art Space</p>
     <p>Schustehrusstraße 17<br>10585 Berlin-Charlottenburg</p>
     <p><a href="mailto:gierkeplatz6@gmail.com">gierkeplatz6@gmail.com</a><br><a href="tel:+491639859835">+49&nbsp;163&nbsp;985&nbsp;98&nbsp;35</a></p>
-    <p><a href="impressum.html">Impressum</a></p>
+    <p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
   </div>
 </footer>
 

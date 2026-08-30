@@ -72,6 +72,13 @@ Fertig: Die Seite läuft dann unter https://gierke6artspace.de.
   prüfen. Ein Impressum ist in Deutschland Pflicht (§ 5 DDG).
 - **Kontakt-E-Mail:** aktuell `gierkeplatz6@gmail.com` (in `index.html` und
   `impressum.html`).
-- **Datenschutzerklärung:** Die Seite setzt keine Cookies und kein Tracking,
-  lädt aber Schriften von Google Fonts. Wer ganz sicher gehen will, sollte
-  eine kurze Datenschutzerklärung ergänzen oder die Schriften lokal einbinden.
+- **Datenschutz:** Die Schriften werden lokal eingebunden (keine Google-Fonts-
+  Anfragen, DSGVO-konform) und eine Datenschutzerklärung liegt unter
+  `datenschutz.html`. Bitte einmal gegenlesen.
+- **Google Business Profile:** Für lokale Suchanfragen ("Eventraum
+  Charlottenburg") lohnt sich ein kostenloses Google-Business-Profil für
+  "Gierke6 Art Space", Schustehrusstraße 17 — Kategorie Veranstaltungsraum /
+  Kunstgalerie, mit Fotos und Link zur Website.
+- **Backlink:** Auf gierke6contemporary.de einen Link zu gierke6artspace.de
+  setzen (und umgekehrt ist bereits geschehen) — die neue Domain startet ohne
+  Backlinks.

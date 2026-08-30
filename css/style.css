@@ -2,6 +2,13 @@
    Gierke6 Art Space — palette drawn from the rooms themselves:
    linen ground, plaster grey-green walls, pine floor, dark wood ink
    ============================================================ */
+
+/* Self-hosted Archivo (DSGVO: keine Anfragen an Google-Server) */
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
 :root {
   --linen:   #EFE9DD;  /* page ground */
   --plaster: #DDDDD4;  /* wall grey-green, alternate sections */
