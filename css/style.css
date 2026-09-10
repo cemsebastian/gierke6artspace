@@ -376,13 +376,12 @@ a { color: var(--umber); }
 
 .gallery {
   display: grid;
-  align-items: start;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1.25rem, 2.5vw, 2rem);
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   margin-top: clamp(2.5rem, 6vh, 4rem);
 }
 .gallery figure { margin: 0; }
-.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.gallery img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 .gallery figcaption {
   font-size: 0.8rem;
   letter-spacing: 0.1em;
@@ -479,8 +478,6 @@ a { color: var(--umber); }
   .fact + .fact { border-left: 0; }
   .fact:nth-child(even) { border-left: 1px solid var(--line); }
   .fact:nth-child(n+3) { border-top: 1px solid var(--line); }
-
-  .gallery { grid-template-columns: 1fr; }
 }
 
 /* ---------- Reduced motion ---------- */
