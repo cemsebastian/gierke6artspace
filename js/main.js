@@ -14,6 +14,26 @@ if (toggle && navList) {
   });
 }
 
+// Right-edge section dots: highlight whichever section crosses mid-viewport
+const dotLinks = document.querySelectorAll('.section-dots a');
+if (dotLinks.length && 'IntersectionObserver' in window) {
+  const dotMap = new Map();
+  dotLinks.forEach((a) => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) dotMap.set(el, a);
+  });
+  const dotObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        dotLinks.forEach((a) => a.removeAttribute('aria-current'));
+        dotMap.get(entry.target)?.setAttribute('aria-current', 'true');
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  dotMap.forEach((_, el) => dotObserver.observe(el));
+}
+
 // Solid header once scrolled past the top of the hero
 const header = document.querySelector('.site-header.over-hero');
 if (header) {
