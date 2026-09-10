@@ -318,7 +318,7 @@ a { color: var(--umber); }
 /* ---------- Intro ---------- */
 .intro { padding: clamp(4.5rem, 10vh, 7.5rem) 0 0; text-align: center; }
 .eyebrow {
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 0.26em;
   text-transform: uppercase;
@@ -326,9 +326,21 @@ a { color: var(--umber); }
   margin: 0 0 1rem;
 }
 .use-list {
-  font-size: 0.92rem;
+  font-size: 1.38rem;
   color: var(--ink-soft);
   margin: 0 0 2.5rem;
+}
+/* keep both lines on a single line where there's room, breaking out of the
+   narrow text column instead of wrapping at the larger size */
+@media (min-width: 64rem) {
+  .eyebrow, .use-list {
+    position: relative;
+    left: 50%;
+    translate: -50% 0; /* standalone property: won't clash with .reveal's transform */
+    width: max-content;
+    max-width: none;
+    white-space: nowrap;
+  }
 }
 .intro h2 {
   font-size: clamp(1.9rem, 4.4vw, 3.1rem);
