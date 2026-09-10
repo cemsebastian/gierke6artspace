@@ -383,12 +383,6 @@ a { color: var(--umber); }
 }
 .gallery figure { margin: 0; }
 .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-/* fifth photo spans full width so an odd count doesn't leave a lopsided gap */
-.gallery-5 figure:last-child { grid-column: 1 / -1; }
-.gallery-5 figure:last-child img { aspect-ratio: 16 / 7; }
-@media (max-width: 47.9rem) {
-  .gallery-5 figure:last-child img { aspect-ratio: 4 / 3; }
-}
 .gallery figcaption {
   font-size: 0.8rem;
   letter-spacing: 0.1em;
