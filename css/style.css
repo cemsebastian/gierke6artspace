@@ -585,9 +585,22 @@ a { color: var(--umber); }
 @media (max-width: 47.9rem) {
   .br-lg { display: none; }
   .wordmark { font-size: clamp(1.25rem, 6.2vw, 2.1rem); }
-  .site-nav { gap: 0.9rem; }
+  .site-nav { gap: 0.5rem; }
   .lang-switch { order: -1; }
-  .nav-toggle { display: block; }
+  .lang-switch a { padding-block: 0.3rem; }
+  .lang-switch a::after { inset: -0.6rem -0.4rem; }
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin-right: -10px; /* bars line up with the 20px page gutter, tap area stays 44px */
+  }
+  .nav-toggle span { margin: 0; }
   .nav-list {
     position: absolute;
     top: var(--header-h);
@@ -625,7 +638,6 @@ a { color: var(--umber); }
 /* ---------- Very small phones (<= 360px) ---------- */
 @media (max-width: 22.5rem) {
   .wordmark { font-size: 1.05rem; }
-  .site-nav { gap: 0.6rem; }
   .lang-switch { font-size: 0.78rem; letter-spacing: 0.1em; gap: 0.3rem; }
 }
 
