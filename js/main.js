@@ -6,7 +6,8 @@ if (toggle && navList) {
   const setOpen = (open) => {
     navList.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    const label = open ? toggle.dataset.labelClose : toggle.dataset.labelOpen;
+    if (label) toggle.setAttribute('aria-label', label);
   };
   toggle.addEventListener('click', () => setOpen(!navList.classList.contains('is-open')));
   navList.addEventListener('click', (e) => {
