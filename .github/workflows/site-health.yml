@@ -1,0 +1,104 @@
+# Weekly health check of the live site (gierke6artspace.de).
+# Checks that every page loads and looks right, that all links and images work,
+# and that the HTTPS certificate isn't about to expire. On failure it opens a
+# GitHub issue (which emails the repo owner); when everything passes again it
+# closes that issue. Run it by hand via Actions → Site health check → Run workflow.
+
+name: Site health check
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # Mondays 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  actions: write
+
+env:
+  SITE: https://gierke6artspace.de
+  ISSUE_TITLE: "Site health check failed"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pages load and show the expected content
+        id: pages
+        continue-on-error: true
+        run: |
+          fail=0
+          for path in "" de/ impressum.html datenschutz.html de/impressum.html de/datenschutz.html; do
+            url="$SITE/$path"
+            status=$(curl -sS -o page.html -w '%{http_code}' --retry 3 --max-time 30 "$url" || echo 000)
+            if [ "$status" != "200" ]; then
+              echo "::error::$url returned HTTP $status"; fail=1
+            elif ! grep -q "Gierke6" page.html; then
+              echo "::error::$url loaded but does not mention Gierke6 (blank or wrong page?)"; fail=1
+            else
+              echo "OK  $url"
+            fi
+          done
+          exit $fail
+
+      - name: HTTPS certificate valid for 14+ more days
+        id: cert
+        continue-on-error: true
+        run: |
+          host=${SITE#https://}
+          expiry=$(echo | openssl s_client -servername "$host" -connect "$host:443" 2>/dev/null | openssl x509 -noout -enddate | cut -d= -f2)
+          echo "Certificate expires: $expiry"
+          echo | openssl s_client -servername "$host" -connect "$host:443" 2>/dev/null \
+            | openssl x509 -noout -checkend $((14 * 24 * 3600)) \
+            || { echo "::error::Certificate expires within 14 days ($expiry)"; exit 1; }
+
+      - name: All links and images work
+        id: links
+        continue-on-error: true
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: true
+          args: >-
+            --no-progress --max-retries 3 --accept 200,429
+            --exclude '^mailto:' --exclude '^tel:'
+            ${{ env.SITE }}/ ${{ env.SITE }}/de/
+            ${{ env.SITE }}/impressum.html ${{ env.SITE }}/datenschutz.html
+            ${{ env.SITE }}/de/impressum.html ${{ env.SITE }}/de/datenschutz.html
+
+      - name: Open or update an issue on failure, close it on recovery
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PAGES: ${{ steps.pages.outcome }}
+          CERT: ${{ steps.cert.outcome }}
+          LINKS: ${{ steps.links.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          existing=$(gh issue list --state open --search "in:title \"$ISSUE_TITLE\"" --json number --jq '.[0].number')
+          if [ "$PAGES" = success ] && [ "$CERT" = success ] && [ "$LINKS" = success ]; then
+            echo "All checks passed."
+            [ -n "$existing" ] && gh issue close "$existing" --comment "All checks pass again: $RUN_URL"
+            exit 0
+          fi
+          body=$(printf '%s\n' \
+            "The weekly check of $SITE found a problem." "" \
+            "- Pages load: **$PAGES**" \
+            "- HTTPS certificate: **$CERT**" \
+            "- Links and images: **$LINKS**" "" \
+            "Details (open the failed step): $RUN_URL")
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh issue create --title "$ISSUE_TITLE" --body "$body" --assignee "${{ github.repository_owner }}"
+          fi
+          exit 1
+
+  # GitHub pauses scheduled workflows after 60 days without repo activity.
+  # Re-enabling this workflow via the API each run keeps the schedule alive.
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/site-health.yml/enable"
